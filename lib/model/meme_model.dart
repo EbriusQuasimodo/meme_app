@@ -1,9 +1,5 @@
 import 'package:meme_app/model/data_list_model.dart';
-import 'package:json_annotation/json_annotation.dart';
 
-part 'meme_model.g.dart';
-
-@JsonSerializable()
 class MemeModel{
   int code;
   List<Data> data;
@@ -14,9 +10,32 @@ class MemeModel{
     required this.data,
     required this.next,
 });
-  factory MemeModel.fromJson(Map<String, dynamic> json) =>
-      _$MemeModelFromJson(json);
+  factory MemeModel.fromJson(Map<String, dynamic> json) {
+    return MemeModel(
+      code: json['code'] as int,
+      data: (json['data'] as List<dynamic>)
+          .map((dynamic e) => Data.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      next: json['next'] as String,
+    );
+  }
 
-  Map<String, dynamic> toJson() => _$MemeModelToJson(this);
+}
+
+
+abstract class MemeResult{}
+
+class MemeResultSuccess extends MemeResult {
+  final MemeModel memeModel;
+  MemeResultSuccess(this.memeModel);
+}
+
+class MemeResultError extends MemeResult {
+  final String error;
+  MemeResultError(this.error);
+}
+
+class MemeResultLoading extends MemeResult {
+  MemeResultLoading();
 }
 
