@@ -7,7 +7,7 @@ import 'package:meme_app/model/meme_model.dart';
 class ApiClient {
 int page = 1;
 
-  Future<List<Data>> getMovieDio() async {
+  Future<List<Data>> getMeme() async {
     Dio dio = new Dio();
     try {
       Response response = await dio.get(
