@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:meme_app/model/data_list_model.dart';
 import 'package:meme_app/model/meme_model.dart';
 
+
 class ApiClient {
 int page = 1;
 
